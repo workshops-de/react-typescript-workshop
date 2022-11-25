@@ -249,3 +249,26 @@ export const BookListItem = ({ book }: BookListItemProps) => {
 ### Bonus
 
 - Add css styles in a `BookListItem.css` file to add a border, subtle shadow and padding to the BookListItem
+
+## 5 - Display a list of books
+
+- Instead of only showing the first two example books, render the entire list using the `map` array method. Don't forget to set the key attribute on each ListItem.
+- Move the list rendering logic into a new `BookList` component, which takes the `books` as a prop
+
+### Hints
+
+```tsx
+<>
+  {books.map((book) => (
+    <BookListItem book={book} key={book.id}></BookListItem>
+  ))}
+</>
+```
+
+### Bonus
+
+- Try to omit any wrapping `<div>` or other html elements, so that the BookList component only renders the BookListItems.
+- Add a header to the book list that shows the number of books in the list
+- Since the `BookListItem` component belongs to the `BookList` move its directory into the `BookList` directory and adjust the imports
+- Display the minimum and maximum number of pages in the `BookList` header.
+- Display the minimum and maximum price of the books in the `BookList` header
