@@ -8,6 +8,7 @@ export interface BookListItemProps {
 }
 
 const getPriceRating = (price: string) => {
+  if (!price) return;
   const priceNumber = parseInt(price.substring(1));
   if (isNaN(priceNumber)) return "";
   if (priceNumber <= 10) return "$";
