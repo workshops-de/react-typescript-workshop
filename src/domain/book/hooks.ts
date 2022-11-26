@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchBooks } from "./api";
+import { fetchBook, fetchBooks } from "./api";
 import type { Book } from "./Book";
 import type { FetchState } from "./FetchState";
 
@@ -32,4 +32,26 @@ export const useBooks = () => {
     error,
     refresh,
   };
+};
+
+export const useBook = (isbn: string) => {
+  const [book, setBook] = useState({} as Book);
+  const [state, setState] = useState<FetchState>("initial");
+  const [error, setError] = useState<Error>();
+
+  useEffect(() => {
+    if (!isbn) return;
+    setState("loading");
+    fetchBook(isbn)
+      .then((book) => {
+        setBook(book);
+        setState("success");
+      })
+      .catch((err) => {
+        setError(err);
+        setState("error");
+      });
+  }, [isbn]);
+
+  return { book, state, error };
 };
