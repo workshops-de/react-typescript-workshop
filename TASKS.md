@@ -294,3 +294,75 @@ export const BookListItem = ({ book }: BookListItemProps) => {
 
 - Display an emoji of your choice next to books that are particularaly long (> 500 pages)
 - Display one to three dollar signs next to books depending on their price, e.g. $0 - $10, $10 - $30, $30 - $999
+
+## 7 - Add a like counter to the BookListItem component
+
+- Add a `<button>` element to the BookListItem component that shows a clapping hands emoji (`&#128079;`)
+- Keep track how many times the button was clicked and display that number next to the emoji.
+- If the button was clicked 5 or more times show a star emoji (`&#11088;`) in front of the book title.
+
+### Hints
+
+```tsx
+const [numLikes, setNumLikes] = useState(0);
+```
+
+```tsx
+<button onClick={() => setNumLikes(numLikes + 1)}>&#128079;</button>
+```
+
+### Bonus
+
+- Extract the like counter into a separate `LikeCounter` component. Pass both the current count as well as a callback function to set the count as props.
+- Add another button for dislike. Only show the star when there's a +5 positive balance towards likes
+- If the num Likes is 0, don't display that number
+
+## 8 - Display the book's abstract, but make it hideable
+
+- Display the book's abstract in the `BookListItem` component.
+- Add a button to toggle if the abstract is being shown or hidden. The button text should be `+` or `-` depending on the state
+- Create a new `Hideable` component, which encapsulates this behaviour. The `Hideable` component should render the children elements passed to it and a button to show/hide them.
+- Use the `Hideable` component in `BookListItem`.
+
+### Hints
+
+```tsx
+<Hideable>{book.abstract}</Hideable>
+```
+
+```tsx
+import { ReactNode } from "react";
+
+export interface MyComponentProps {
+  children: ReactNode;
+}
+```
+
+```tsx
+{
+  shouldShowChildren && children;
+}
+```
+
+Hint for fade in animation bonus task:
+
+```css
+.fade-in {
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+```
+
+### Bonus
+
+- Add a prop to `Hideable` to set the initial state to either hidden or visible.
+- Add an optional prop to set a maximum height for the contents of `Hideable` and make sure a scrollbar is shown when this height limit is reached.
+- Add an animation that fades in the content when it's being shown.
