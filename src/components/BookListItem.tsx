@@ -1,4 +1,6 @@
+import { useState } from "react";
 import type { Book } from "../domain/book/Book";
+import { LikeCounter } from "./LikeCounter";
 
 export interface BookListItemProps {
   book: Book;
@@ -13,11 +15,13 @@ const getPriceRating = (price: string) => {
 };
 
 export const BookListItem = ({ book }: BookListItemProps) => {
+  const [likes, setLikes] = useState(0);
   const isFree = book.price === "$0.00";
 
   return (
     <div className={`book-list-item ${isFree ? "book-list-item_free" : ""}`}>
       <h2>
+        {likes >= 5 && <span className="icon_entry">⭐ </span>}
         {isFree && <span>💰 </span>}
         {book.title}
       </h2>
@@ -26,6 +30,7 @@ export const BookListItem = ({ book }: BookListItemProps) => {
         <div style={{ color: "green" }}>{getPriceRating(book.price)}</div>
       )}
       <div className="text-meta">by {book.author}</div>
+      <LikeCounter likes={likes} onLikesChange={setLikes} />
     </div>
   );
 };
