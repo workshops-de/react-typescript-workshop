@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Book } from "../domain/book/Book";
+import { Hideable } from "./Hideable";
 import { LikeCounter } from "./LikeCounter";
 
 export interface BookListItemProps {
@@ -31,6 +32,9 @@ export const BookListItem = ({ book }: BookListItemProps) => {
       )}
       <div className="text-meta">by {book.author}</div>
       <LikeCounter likes={likes} onLikesChange={setLikes} />
+      <Hideable>
+        <p>{book.abstract}</p>
+      </Hideable>
     </div>
   );
 };
