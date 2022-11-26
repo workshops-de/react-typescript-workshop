@@ -1,5 +1,8 @@
 import type { Book } from "../domain/book/Book";
+import { ThemeContext } from "../domain/theme/ThemeContext";
 import { BookListItem } from "./BookListItem";
+
+const localTheme = { primaryColor: "steelblue", setPrimaryColor: () => {} };
 
 interface BookListProps {
   books: Book[];
@@ -18,14 +21,16 @@ const getMaxPages = (books: Book[]) => {
 
 export const BookList = ({ books }: BookListProps) => {
   return (
-    <div className="book-list">
-      <small className="text-meta">
-        Showing {books.length} books with {getMinPages(books)} to{" "}
-        {getMaxPages(books)} pages.
-      </small>
-      {books.map((b) => (
-        <BookListItem key={b.id} book={b} />
-      ))}
-    </div>
+    <ThemeContext.Provider value={localTheme}>
+      <div className="book-list">
+        <small className="text-meta">
+          Showing {books.length} books with {getMinPages(books)} to{" "}
+          {getMaxPages(books)} pages.
+        </small>
+        {books.map((b) => (
+          <BookListItem key={b.id} book={b} />
+        ))}
+      </div>
+    </ThemeContext.Provider>
   );
 };
