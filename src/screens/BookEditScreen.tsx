@@ -7,6 +7,8 @@ export const BookEditScreen = () => {
   const { isbn } = useParams<{ isbn: string }>();
   const [book, setBook] = useState<Book>();
   const [title, setTitle] = useState("");
+  const titleError =
+    title.length < 5 && "The title must be at least 5 characters long.";
 
   useEffect(() => {
     if (!isbn) return;
@@ -22,7 +24,9 @@ export const BookEditScreen = () => {
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
-    console.log(title);
+    if (titleError || !book) return;
+
+    alert(title);
   };
 
   return (
@@ -35,7 +39,7 @@ export const BookEditScreen = () => {
         value={title}
         onChange={(ev) => setTitle(ev.target.value)}
       />
-
+      {titleError && <div className="error">{titleError}</div>}
       <button type="submit" className="m-top">
         <span>💾</span>
         Save
