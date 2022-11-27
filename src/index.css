@@ -587,3 +587,9 @@ img {
     transform: rotate(-360deg);
   }
 }
+
+.edit-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+}

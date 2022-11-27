@@ -22,6 +22,13 @@ export const BookDetailScreen = () => {
       </small>
       <h2 className="m-top m-bottom">{book.price}</h2>
       <p className="m-top">{book.abstract}</p>
+
+      <Link to="edit" className="m-top">
+        <button>
+          <span>✏️</span>
+          Edit
+        </button>
+      </Link>
     </div>
   );
 };
