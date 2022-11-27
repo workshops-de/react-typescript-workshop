@@ -9,6 +9,9 @@ export const BookEditScreen = () => {
   const [title, setTitle] = useState("");
   const navigate = useNavigate();
 
+  const titleError =
+    title.length < 5 && "The title must be at least 5 characters long.";
+
   useEffect(() => {
     if (!isbn) return;
     fetchBook(isbn).then((book) => {
@@ -23,7 +26,9 @@ export const BookEditScreen = () => {
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
-    console.log(title);
+    if (titleError || !book) return;
+
+    alert(title);
   };
 
   const navigateBack = () => {
@@ -42,13 +47,13 @@ export const BookEditScreen = () => {
         minLength={5}
         onChange={(ev) => setTitle(ev.target.value)}
       />
-
+      {titleError && <div className="error">{titleError}</div>}
       <div className="edit-buttons">
         <button type="submit">
           <span>💾</span>
           Save
         </button>
-        <button className="secondary" onClick={navigateBack}>
+        <button type="button" className="secondary" onClick={navigateBack}>
           <span>❌</span>
           Cancel
         </button>
