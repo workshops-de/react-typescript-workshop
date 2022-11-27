@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { fetchBook, type Book } from "../../domain/book";
 
 export const BookDetailScreen = () => {
@@ -30,6 +30,12 @@ export const BookDetailScreen = () => {
       <h4>Abstract</h4>
       <p>{book.abstract}</p>
       <strong>{book.price}</strong>
+
+      <div>
+        <NavLink to={`/books/${book.isbn}/edit`}>
+          <button>Edit</button>
+        </NavLink>
+      </div>
     </div>
   );
 };
