@@ -1,61 +1,134 @@
-import { useEffect, useState, type FormEvent } from "react";
-import { Link, useParams } from "react-router";
-import { fetchBook } from "../domain/book/api";
+import { type FormEvent, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router";
+import { fetchBook, patchBook } from "../domain/book/api";
 import type { Book } from "../domain/book/Book";
+import { useFormBucket } from "../utils/useFormBucket";
+
+type EditBookDTO = Pick<
+  Book,
+  "title" | "subtitle" | "author" | "numPages" | "price"
+>;
+
+const blankEditBookDTO: EditBookDTO = {
+  title: "",
+  subtitle: "",
+  author: "",
+  numPages: 0,
+  price: "",
+};
+
+const validateBook = (values: EditBookDTO) => {
+  return {
+    title:
+      values.title.length < 5
+        ? "Please enter a title thats at least five characters long"
+        : undefined,
+    author:
+      values.author.length < 2 ? "Please enter a valid author name" : undefined,
+    numPages:
+      values.numPages < 1
+        ? "Your book should have at least one page!"
+        : undefined,
+    price: !/^\$\d+\.\d{2}$/.test(values.price)
+      ? "Please enter a price in the format $0.00"
+      : undefined,
+  };
+};
 
 export const BookEditScreen = () => {
   const { isbn } = useParams<{ isbn: string }>();
   const [book, setBook] = useState<Book>();
-  const [title, setTitle] = useState("");
-  const [titleTouched, setTitleTouched] = useState(false);
+  const [initialValuesString, setInitialValuesString] = useState("");
+  const navigate = useNavigate();
 
-  const titleError =
-    title.length < 5 && "The title must be at least 5 characters long.";
+  const { values, register, isValid, errorFor, setValues } =
+    useFormBucket<EditBookDTO>({
+      initialValues: blankEditBookDTO,
+      validate: validateBook,
+    });
 
   useEffect(() => {
     if (!isbn) return;
     fetchBook(isbn).then((book) => {
+      const dto: EditBookDTO = {
+        title: book.title,
+        subtitle: book.subtitle,
+        author: book.author,
+        numPages: book.numPages,
+        price: book.price,
+      };
       setBook(book);
+      setInitialValuesString(JSON.stringify(dto));
+      setValues(dto);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isbn]);
-
-  useEffect(() => {
-    if (!book || book.title === undefined) return;
-    setTitle(book.title);
-  }, [book]);
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
-    if (titleError || !book) return;
+    if (!book || !isValid()) return;
 
-    alert(title);
+    patchBook(book.id, values)
+      .then((data) => {
+        console.log("Updated successfully. Response:", data);
+        navigate("..", { relative: "path" });
+      })
+      .catch((err) => console.error("Error while updating book. Error:", err));
   };
 
   return (
     <form className="book-edit-screen" onSubmit={handleSubmit}>
-      <label htmlFor="title">Title</label>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        value={title}
-        required
-        minLength={5}
-        onChange={(ev) => setTitle(ev.target.value)}
-        onBlur={() => setTitleTouched(true)}
-        style={{ borderBottom: titleError ? "2px solid red" : "" }}
-      />
-      {titleTouched && titleError && <div className="error">{titleError}</div>}
-      <div className="edit-buttons">
-        <button type="submit" disabled={!!titleError}>
-          Save
+      <label>
+        Title
+        <input type="text" {...register("title")} />
+        {errorFor("title", (msg) => (
+          <div className="error">{msg}</div>
+        ))}
+      </label>
+
+      <label>
+        Subtitle
+        <input type="text" {...register("subtitle")} />
+        {errorFor("subtitle", (msg) => (
+          <div className="error">{msg}</div>
+        ))}
+      </label>
+
+      <label>
+        Author
+        <input type="text" {...register("author")} />
+        {errorFor("author", (msg) => (
+          <div className="error">{msg}</div>
+        ))}
+      </label>
+
+      <label>
+        Pages
+        <input type="number" min={1} {...register("numPages")} />
+        {errorFor("numPages", (msg) => (
+          <div className="error">{msg}</div>
+        ))}
+      </label>
+
+      <label>
+        Price
+        <input type="text" {...register("price")} />
+        {errorFor("price", (msg) => (
+          <div className="error">{msg}</div>
+        ))}
+      </label>
+
+      <button
+        type="submit"
+        disabled={initialValuesString === JSON.stringify(values)}
+      >
+        Save
+      </button>
+      <Link to={`/books/${book?.id}`}>
+        <button className="tertiary" type="button">
+          Cancel
         </button>
-        <Link to=".." relative="path">
-          <button className="tertiary" type="button">
-            Cancel
-          </button>
-        </Link>
-      </div>
+      </Link>
     </form>
   );
 };
