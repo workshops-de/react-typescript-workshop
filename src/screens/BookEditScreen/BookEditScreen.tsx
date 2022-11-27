@@ -1,20 +1,47 @@
-import { useRef, FormEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useParams } from "react-router-dom";
+import { fetchBook, type Book } from "../../domain/book";
+
+export type BookEditScreenRouteParams = {
+  isbn: string;
+};
 
 export const BookEditScreen = () => {
-  const titleInputRef = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState("");
+
+  const { isbn } = useParams<BookEditScreenRouteParams>();
+  const [book, setBook] = useState<Book>();
+
+  useEffect(() => {
+    if (isbn) {
+      fetchBook(isbn).then((book) => setBook(book));
+    }
+  }, [isbn]);
+
+  useEffect(() => {
+    if (book) {
+      setTitle(book.title);
+    }
+  }, [book]);
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    // Be careful when using the ! operator to assert that a value is not null or undefined.
-    // In this case it is ok, as we know that the ref will always be set to an element.
-    console.log(titleInputRef.current!.value);
+    console.log(title);
   };
 
   return (
     <form onSubmit={onSubmit}>
       <label htmlFor="title">Title:</label>
-      <input ref={titleInputRef} type="text" id="title" name="title"></input>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value={title}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          setTitle(event.target.value)
+        }
+      ></input>
 
       <button type="submit">Save</button>
     </form>
