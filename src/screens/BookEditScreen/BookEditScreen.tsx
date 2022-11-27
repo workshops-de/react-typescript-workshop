@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { useParams } from "react-router-dom";
-import { fetchBook, type Book } from "../../domain/book";
+import { fetchBook, type Book, updateBook } from "../../domain/book";
 
 export type BookEditScreenRouteParams = {
   isbn: string;
@@ -28,14 +28,17 @@ export const BookEditScreen = () => {
     title.length < 5 ? "The title must be at least 5 characters long" : "";
   const [titleWasTouched, setTitleWasTouched] = useState(false);
 
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (titleError) {
+    if (titleError || !book) {
       return;
     }
 
-    alert(title);
+    await updateBook({
+      ...book,
+      title,
+    });
   };
 
   return (
