@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { fetchBook } from "../domain/book/api";
+import { fetchBook, updateBook } from "../domain/book/api";
 import { Book } from "../domain/book/Book";
 
 export const BookEditScreen = () => {
@@ -28,7 +28,9 @@ export const BookEditScreen = () => {
     ev.preventDefault();
     if (titleError || !book) return;
 
-    alert(title);
+    updateBook({ ...book, title })
+      .then((data) => console.log("Updated successfully. Response:", data))
+      .catch((err) => console.error("Error while updating book. Error:", err));
   };
 
   const navigateBack = () => {
