@@ -1,27 +1,41 @@
-import { type FormEvent, useRef } from "react";
-import { Link } from "react-router";
+import { useEffect, useState, type FormEvent } from "react";
+import { Link, useParams } from "react-router";
+import { fetchBook } from "../domain/book/api";
+import type { Book } from "../domain/book/Book";
 
 export const BookEditScreen = () => {
-  const titleInputRef = useRef<HTMLInputElement>(null);
+  const { isbn } = useParams<{ isbn: string }>();
+  const [book, setBook] = useState<Book>();
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    if (!isbn) return;
+    fetchBook(isbn).then((book) => {
+      setBook(book);
+    });
+  }, [isbn]);
+
+  useEffect(() => {
+    if (!book || book.title === undefined) return;
+    setTitle(book.title);
+  }, [book]);
 
   const handleSubmit = (ev: FormEvent) => {
     ev.preventDefault();
-
-    // Be careful when using the ! operator to assert that a value is not null or undefined.
-    // In this case it is ok, as we know that the ref will always be set to an element.
-    console.log(titleInputRef.current!.value);
+    console.log(title);
   };
 
   return (
     <form className="book-edit-screen" onSubmit={handleSubmit}>
       <label htmlFor="title">Title</label>
       <input
-        ref={titleInputRef}
         type="text"
         id="title"
         name="title"
+        value={title}
         required
         minLength={5}
+        onChange={(ev) => setTitle(ev.target.value)}
       />
 
       <div className="edit-buttons">
