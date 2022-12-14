@@ -21,6 +21,7 @@ export const AppHeader = () => {
         <NavLink to="/about" style={highlightActiveLink}>
           About
         </NavLink>
+        <NavLink to="/counter">Counter</NavLink>
       </nav>
     </header>
   );

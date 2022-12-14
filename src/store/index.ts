@@ -1,7 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import count from "./count";
 
 export const rootReducer = combineReducers({
-  count: (state = 0) => state,
+  count,
   books: (state = []) => state,
 });
 
