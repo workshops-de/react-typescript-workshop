@@ -5,6 +5,7 @@ import { BooksScreen } from "./screens/BooksScreen";
 import { AboutScreen } from "./screens/AboutScreen";
 import { BookDetailScreen } from "./screens/BookDetailScreen";
 import { BookEditScreen } from "./screens/BookEditScreen";
+import { CounterScreen } from "./screens/CounterScreen";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "books/:isbn/edit",
         element: <BookEditScreen />,
+      },
+      {
+        path: "/counter",
+        element: <CounterScreen />,
       },
     ],
   },
