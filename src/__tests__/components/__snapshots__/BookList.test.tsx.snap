@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/BookList renders a BookList correctly 1`] = `
+<div
+  className="book-list"
+>
+  <small
+    className="text-meta"
+  >
+    Showing 
+    2
+     books with 
+    9007199254740991
+     to
+     
+    0
+     pages.
+  </small>
+  <div
+    className="book-list-item "
+  >
+    <a
+      href="/books/isbn-1"
+      onClick={[Function]}
+    >
+      <h2>
+        My first book
+      </h2>
+    </a>
+    <h3 />
+    <div
+      style={
+        Object {
+          "color": "green",
+        }
+      }
+    >
+      $$
+    </div>
+    <div
+      className="text-meta"
+    >
+      by 
+    </div>
+    <button
+      className="secondary"
+      onClick={[Function]}
+    >
+      <span>
+        👏
+      </span>
+      0
+    </button>
+    <div
+      className="hideable"
+    >
+      <button
+        className="tertiary"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "steelblue",
+          }
+        }
+      >
+        + show
+         details
+      </button>
+    </div>
+  </div>
+  <div
+    className="book-list-item "
+  >
+    <a
+      href="/books/isbn-2"
+      onClick={[Function]}
+    >
+      <h2>
+        My second book
+      </h2>
+    </a>
+    <h3 />
+    <div
+      style={
+        Object {
+          "color": "green",
+        }
+      }
+    >
+      $$
+    </div>
+    <div
+      className="text-meta"
+    >
+      by 
+    </div>
+    <button
+      className="secondary"
+      onClick={[Function]}
+    >
+      <span>
+        👏
+      </span>
+      0
+    </button>
+    <div
+      className="hideable"
+    >
+      <button
+        className="tertiary"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "steelblue",
+          }
+        }
+      >
+        + show
+         details
+      </button>
+    </div>
+  </div>
+</div>
+`;

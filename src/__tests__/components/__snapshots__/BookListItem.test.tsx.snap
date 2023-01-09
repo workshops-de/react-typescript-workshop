@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/BookListItem renders a BookListItem correctly 1`] = `
+<div
+  className="book-list-item "
+>
+  <a
+    href="/books/my-isbn"
+    onClick={[Function]}
+  >
+    <h2>
+      My book
+    </h2>
+  </a>
+  <h3 />
+  <div
+    style={
+      Object {
+        "color": "green",
+      }
+    }
+  >
+    $$
+  </div>
+  <div
+    className="text-meta"
+  >
+    by 
+  </div>
+  <button
+    className="secondary"
+    onClick={[Function]}
+  >
+    <span>
+      👏
+    </span>
+    0
+  </button>
+  <div
+    className="hideable"
+  >
+    <button
+      className="tertiary"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "steelblue",
+        }
+      }
+    >
+      + show
+       details
+    </button>
+  </div>
+</div>
+`;
