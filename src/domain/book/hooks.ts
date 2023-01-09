@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addBooks, booksListSelector } from "../../store/books";
 import { Book } from "./Book";
 import { fetchBooks } from "./api";
 
@@ -18,4 +20,19 @@ export const useBooks = () => {
   return {
     books,
   };
+};
+
+export const useBooksRedux = () => {
+  const books = useSelector(booksListSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchBooks();
+      dispatch(addBooks(data));
+    };
+    fetchData();
+  }, [dispatch]);
+
+  return { books };
 };

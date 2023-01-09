@@ -1,7 +1,7 @@
 import { BookList } from "../../components/BookList";
-import { useBooks } from "../../domain/book";
+import { useBooksRedux } from "../../domain/book";
 
 export const BooksScreen = () => {
-  const { books } = useBooks();
+  const { books } = useBooksRedux();
   return <BookList books={books} />;
 };

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/BookListItem renders a booklist item correctly 1`] = `
+<div>
+  <a
+    className=""
+    href="/books/my-isbn"
+    onClick={[Function]}
+  >
+    <h2
+      style={
+        Object {
+          "textDecoration": "none",
+        }
+      }
+    >
+      My book
+    </h2>
+  </a>
+  <h3 />
+  <div>
+    by 
+    <strong />
+  </div>
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      👏 
+      0
+    </button>
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    +
+  </button>
+</div>
+`;

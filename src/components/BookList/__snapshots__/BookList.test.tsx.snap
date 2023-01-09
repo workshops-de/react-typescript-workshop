@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/BookList renders a booklist correctly 1`] = `
+Array [
+  <div>
+    <a
+      className=""
+      href="/books/isbn-1"
+      onClick={[Function]}
+    >
+      <h2
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        My first book
+      </h2>
+    </a>
+    <h3 />
+    <div>
+      by 
+      <strong />
+    </div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        👏 
+        0
+      </button>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      +
+    </button>
+  </div>,
+  <div>
+    <a
+      className=""
+      href="/books/isbn-2"
+      onClick={[Function]}
+    >
+      <h2
+        style={
+          Object {
+            "textDecoration": "none",
+          }
+        }
+      >
+        My second book
+      </h2>
+    </a>
+    <h3 />
+    <div>
+      by 
+      <strong />
+    </div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        👏 
+        0
+      </button>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      +
+    </button>
+  </div>,
+]
+`;
