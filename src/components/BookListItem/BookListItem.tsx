@@ -21,7 +21,9 @@ export const BookListItem = ({ book }: BookListItemProps) => {
         </h2>
       </NavLink>
       <h3>{book.subtitle}</h3>
-      <div>by {book.author}</div>
+      <div>
+        by <strong>{book.author}</strong>
+      </div>
       <div>
         <button onClick={() => setNumLikes(numLikes + 1)}>
           &#128079; {numLikes}

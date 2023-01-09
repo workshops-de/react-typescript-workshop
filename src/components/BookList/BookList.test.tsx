@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import renderer from "react-test-renderer";
 
 import { BookList } from ".";
 import { Book } from "../../domain/book";
@@ -23,5 +24,16 @@ describe("components/BookList", () => {
       // assert that each book will be rendered to the screen
       expect(screen.getByText(book.title)).toBeTruthy();
     }
+  });
+
+  test(`renders a booklist correctly`, () => {
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <BookList books={books} />
+        </MemoryRouter>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
