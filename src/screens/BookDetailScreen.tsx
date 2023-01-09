@@ -1,12 +1,22 @@
-import { Link, useLoaderData } from "react-router-dom";
-import { Book } from "../domain/book/Book";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { bookSelector } from "../store/books";
 
 export const BookDetailScreen = () => {
-  // const { isbn } = useParams<{ isbn: string }>();
-  // const { state, book } = useBook(isbn || "");
-  // if (state === "loading") return <div>Loading...</div>;
+  const { isbn } = useParams<{ isbn: string }>();
 
-  const book = useLoaderData() as Book;
+  // Possibility 1: fetch books and store books in local React state
+  // const [book, setBook] = useState<Book>();
+
+  // useEffect(() => {
+  //   if (!isbn) return;
+  //   fetchBook(isbn).then(setBook);
+  // }, [isbn]);
+
+  // Possibility 2 (via Redux): retrieve book from Redux store (Bonus task)
+  const book = useSelector(bookSelector(isbn));
+
+  if (!book) return <div>Loading...</div>;
 
   return (
     <div className="book-detail-screen">
