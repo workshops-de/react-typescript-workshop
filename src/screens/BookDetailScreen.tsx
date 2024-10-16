@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { validateBookForm } from "../domain/book/validation";
 import { bookSelector } from "../store/books";
 
 export const BookDetailScreen = () => {
@@ -17,6 +18,12 @@ export const BookDetailScreen = () => {
   const book = useSelector(bookSelector(isbn));
 
   if (!book) return <div>Loading...</div>;
+
+  const bookOrError = validateBookForm.safeParse(book);
+
+  console.log({ bookOrError });
+
+  // alert(JSON.stringify(validateBookForm.safeParse(book)));
 
   return (
     <div className="book-detail-screen">
