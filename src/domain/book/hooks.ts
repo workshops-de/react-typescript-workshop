@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addBooks, booksListSelector } from "../../store/books";
 import { fetchBook, fetchBooks } from "./api";
 import type { Book } from "./Book";
 import type { FetchState } from "./FetchState";
@@ -54,4 +56,15 @@ export const useBook = (isbn: string) => {
   }, [isbn]);
 
   return { book, state, error };
+};
+
+export const useBooksRedux = () => {
+  const books = useSelector(booksListSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchBooks().then((data) => dispatch(addBooks(data)));
+  }, [dispatch]);
+
+  return { books };
 };
