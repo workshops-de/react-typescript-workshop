@@ -82,9 +82,11 @@ html {
 
 #root {
   max-width: 43rem;
-  min-height: 100vh;
+  height: 100vh;
   margin: auto;
   padding: 0 1rem;
+
+  overflow: hidden scroll;
 
   background: var(--c-bg-window);
   box-shadow: 0px 0.25rem 0.5rem 0px rgba(0, 0, 0, 0.05),
@@ -94,9 +96,8 @@ html {
 @media (min-width: 43rem) {
   #root {
     margin: 2rem auto;
-    min-height: 0;
+    height: auto;
     max-height: calc(100vh - 4rem);
-    overflow: hidden scroll;
 
     border-radius: 0.75rem;
   }
