@@ -1,0 +1,3 @@
+{
+  "startCommand": "VITE_REACT_APP_URL_API=http://localhost:4730 npx concurrently \"npx bookmonkey-api\" \"npm run dev\""
+}
