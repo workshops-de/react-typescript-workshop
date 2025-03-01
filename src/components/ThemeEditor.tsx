@@ -16,11 +16,13 @@ export const ThemeEditor = () => {
         <button
           key={color}
           style={{
-            background: color,
-            outline: color === primaryColor ? "1px solid #333" : "",
+            color,
+            textDecoration: color === primaryColor ? "underline" : "",
           }}
           onClick={() => handleColorClick(color)}
-        />
+        >
+          {color}
+        </button>
       ))}
     </div>
   );

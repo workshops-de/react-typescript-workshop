@@ -50,16 +50,10 @@ export const BookEditScreen = () => {
         onChange={(ev) => setTitle(ev.target.value)}
       />
       {titleError && <div className="error">{titleError}</div>}
-      <div className="edit-buttons">
-        <button type="submit">
-          <span>💾</span>
-          Save
-        </button>
-        <button type="button" className="secondary" onClick={navigateBack}>
-          <span>❌</span>
-          Cancel
-        </button>
-      </div>
+      <button type="submit">Save book</button>
+      <button type="button" className="secondary" onClick={navigateBack}>
+        Cancel
+      </button>
     </form>
   );
 };

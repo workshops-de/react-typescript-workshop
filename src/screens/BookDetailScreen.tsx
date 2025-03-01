@@ -21,23 +21,20 @@ export const BookDetailScreen = () => {
   return (
     <div className="book-detail-screen">
       <Link to="/books">
-        <span>⬅️ </span>Back to books
+        <button className="tertiary">← Back to books</button>
       </Link>
       <img src={book.cover} alt={book.title} />
-      <h2>{book.title}</h2>
+      <h1>{book.title}</h1>
       <h3>{book.subtitle}</h3>
       <div className="text-meta">by {book.author}</div>
       <small>
         {book.isbn} | {book.numPages} pages
       </small>
-      <h2 className="m-top m-bottom">{book.price}</h2>
-      <p className="m-top">{book.abstract}</p>
+      <h2>{book.price}</h2>
+      <p>{book.abstract}</p>
 
-      <Link to="edit" className="m-top">
-        <button>
-          <span>✏️</span>
-          Edit
-        </button>
+      <Link to="edit">
+        <button>Edit book</button>
       </Link>
     </div>
   );

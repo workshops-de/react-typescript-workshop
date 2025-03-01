@@ -1,4 +1,4 @@
-import { useRef, FormEvent } from "react";
+import { FormEvent, useRef } from "react";
 
 export const BookEditScreen = () => {
   const titleInputRef = useRef<HTMLInputElement>(null);
@@ -16,10 +16,7 @@ export const BookEditScreen = () => {
       <label htmlFor="title">Title</label>
       <input ref={titleInputRef} type="text" id="title" name="title" />
 
-      <button type="submit" className="m-top">
-        <span>💾</span>
-        Save
-      </button>
+      <button type="submit">Save book</button>
     </form>
   );
 };
