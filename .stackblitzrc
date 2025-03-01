@@ -1,5 +1,5 @@
 {
-  "startCommand": "npm i concurrently bookmonkey-api && npx concurrently \"npx bookmonkey-api\" \"npm run dev\"",
+  "startCommand": "npm i concurrently bookmonkey-api && npx concurrently \"npx bookmonkey-api\" \"npm run dev -- --open\"",
   "env": {
     "VITE_REACT_APP_URL_API": "http://localhost:4730"
   }
