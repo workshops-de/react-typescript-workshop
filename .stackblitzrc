@@ -1,3 +1,7 @@
 {
-  "startCommand": "VITE_REACT_APP_URL_API=http://localhost:4730 npx concurrently \"npx bookmonkey-api\" \"npm run dev\""
+  "startCommand": "npx --yes concurrently \"npx bookmonkey-api\" \"npm run dev\"",
+  "initialPath": "http://localhost:4730",
+  "env": {
+    "VITE_REACT_APP_URL_API": "http://localhost:4730"
+  }
 }
