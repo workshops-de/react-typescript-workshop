@@ -23,6 +23,7 @@ export const BookListItem = ({ book }: BookListItemProps) => {
 
   return (
     <div className={`book-list-item ${isFree ? "book-list-item_free" : ""}`}>
+      <img src={book.cover} />
       <Link to={`/books/${book.isbn}`}>
         <h2>
           {likes >= 5 && <span className="icon_entry">⭐ </span>}

@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Outlet } from "react-router";
 import { Provider } from "react-redux";
+import { Outlet } from "react-router";
 import { AppHeader } from "./components/AppHeader";
 import { Theme } from "./domain/theme/Theme";
 import { ThemeContext } from "./domain/theme/ThemeContext";
 import store from "./store";
-import { Outlet } from "react-router";
 
 function App() {
   const [primaryColor, setPrimaryColor] = useState("tomato");
