@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Book } from "../domain/book/Book";
 import { Hideable } from "./Hideable";
 import { LikeCounter } from "./LikeCounter";
+import { Link } from "@tanstack/react-router";
 
 export interface BookListItemProps {
   book: Book;
@@ -22,11 +23,13 @@ export const BookListItem = ({ book }: BookListItemProps) => {
 
   return (
     <div className={`book-list-item ${isFree ? "book-list-item_free" : ""}`}>
-      <h2>
-        {likes >= 5 && <span className="icon_entry">⭐ </span>}
-        {isFree && <span>💰 </span>}
-        {book.title}
-      </h2>
+      <Link to="/books/$isbn" params={{ isbn: book.isbn }}>
+        <h2>
+          {likes >= 5 && <span className="icon_entry">⭐ </span>}
+          {isFree && <span>💰 </span>}
+          {book.title}
+        </h2>
+      </Link>
       <h3>{book.subtitle}</h3>
       {!isFree && (
         <div style={{ color: "green" }}>{getPriceRating(book.price)}</div>
