@@ -274,7 +274,6 @@ label + input + .error {
   margin-top: 1rem;
   margin-right: 1rem;
   font-weight: 700;
-  font-size: var(--font-sm);
   text-transform: uppercase;
   letter-spacing: 0.025em;
 }
